@@ -3,8 +3,8 @@ static ROW_COL_SUM: i32 = 45;
 type Grid = [[i32; 9]; 9];
 pub fn solve(g: &Grid) -> Option<Grid>{
     let mut grid = g.clone();
-    let mut completed_cell_coord: HashSet<String> = HashSet::new();
-    let mut visited: HashMap<String, HashSet<i32>> = HashMap::new();
+    let mut completed_cell_coord: HashSet<i8> = HashSet::new();
+    let mut visited: HashMap<i8, HashSet<i32>> = HashMap::new();
     let mut current_grid_index: (i32, i32) = (0, 0);
     for i in 0..9 {
         for j in 0..9 {
@@ -185,15 +185,6 @@ fn get_segment(i: i32, j: i32) -> i32 {
     }
 }
 
-fn parse_str_coord(s: &String) -> (i32, i32) {
-    let mut split = s.split("");
-    let (x, y) = (split.nth(0), split.nth(1));
-    return (
-        x.unwrap().parse::<i32>().unwrap(),
-        y.unwrap().parse::<i32>().unwrap(),
-    );
-}
-
-fn hash_coord(i: &i32, j: &i32) -> String {
-    return i32::to_string(i) + &i32::to_string(j);
+fn hash_coord(i: &i32, j: &i32) -> i8 {
+    return (i * 10 + j) as i8;
 }
